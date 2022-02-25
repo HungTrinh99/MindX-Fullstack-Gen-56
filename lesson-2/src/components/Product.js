@@ -7,8 +7,8 @@ import ProductImage from "./ProductImage";
 const Product = (props) => {
   const { imgUrl, title, size, price } = props.product;
   return (
-    <div class="newProducts__item">
-      <div class="item__image">
+    <div className="newProducts__item">
+      <div className="item__image">
         <div>
           <img src="images/p6.jpg" alt="p6" />
           <div className="item__image-child">
@@ -16,12 +16,12 @@ const Product = (props) => {
           </div>
         </div>
       </div>
-      <div class="item__content">
+      <div className="item__content">
         <h3>{title}</h3>
         <p>
           <strong>{size}</strong>
         </p>
-        <div class="item__text">
+        <div className="item__text">
           <p>
             <del>{price}</del>
           </p>

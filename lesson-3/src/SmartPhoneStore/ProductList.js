@@ -1,7 +1,7 @@
 import React from "react";
 import ProductItem from "./ProductItem";
 const ProductList = (props) => {
-  const { products, title, onPhoneSelect } = props;
+  const { products, title, onPhoneSelect, onAddToCart } = props;
 
   return (
     <>
@@ -11,7 +11,11 @@ const ProductList = (props) => {
           products.map((product, index) => {
             return (
               <div className="col-4" key={index}>
-                <ProductItem product={product} onPhoneSelect={onPhoneSelect} />
+                <ProductItem
+                  product={product}
+                  onPhoneSelect={onPhoneSelect}
+                  onAddToCart={onAddToCart}
+                />
               </div>
             );
           })}

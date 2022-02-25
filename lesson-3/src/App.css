@@ -1,39 +1,7 @@
-.text-center {
-  text-align: center;
-}
-
-.container {
-  width: 90%;
-  margin: 0 auto;
-}
-
-.d-flex {
-  display: flex;
-  justify-content: space-between;
-}
-.car-result img {
-  width: 300px;
-  height: auto;
-}
-.btn {
-  border: none;
-  padding: 4px 10px;
-  outline: none;
-  margin-right: 8px;
+.delete-icon {
+  transition: all 0.3s;
   cursor: pointer;
 }
-.btn-black {
-  background-color: #000000;
-  color: #fff;
-}
-
-.btn-white {
-  background-color: #fff;
-  color: #000000;
-  border: 1px solid #000000;
-}
-
-.btn-red {
-  background-color: red;
-  color: #fff;
+.delete-icon:hover {
+  transform: scale(1.2);
 }
