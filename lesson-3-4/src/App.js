@@ -1,4 +1,5 @@
 import "./App.css";
+import DemoForm from "./DemoForm";
 import DemoState from "./DemoState";
 import ChangeCarColor from "./DemoState/ChangeCarColor";
 import SmartPhoneStore from "./SmartPhoneStore/SmartPhoneStore";
@@ -7,7 +8,8 @@ function App() {
     <div className="App">
       {/* <DemoState name="Hung Trinh"/> */}
       {/* <ChangeCarColor /> */}
-      <SmartPhoneStore />
+      {/* <SmartPhoneStore /> */}
+      <DemoForm />
     </div>
   );
 }

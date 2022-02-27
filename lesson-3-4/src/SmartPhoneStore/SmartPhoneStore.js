@@ -70,6 +70,7 @@ class SmartPhoneStore extends Component {
 
   onAddToCart = (id) => {
     const { cart } = this.state;
+    const cloneCart = [...cart];
     const selectedPhone = findProductItemInList(id, this.state.products);
 
     // Thêm currentProduct => cart
@@ -81,9 +82,9 @@ class SmartPhoneStore extends Component {
     );
 
     if (idxInCart !== -1) {
-      cart[idxInCart].amount += 1;
+      cloneCart[idxInCart].amount += 1;
       this.setState({
-        cart: cart,
+        cart: cloneCart,
       });
     } else {
       selectedPhone.amount = 1;
