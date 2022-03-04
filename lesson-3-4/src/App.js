@@ -3,13 +3,15 @@ import DemoForm from "./DemoForm";
 import DemoState from "./DemoState";
 import ChangeCarColor from "./DemoState/ChangeCarColor";
 import SmartPhoneStore from "./SmartPhoneStore/SmartPhoneStore";
+import TodoApp from "./TodoApp/TodoApp";
 function App() {
   return (
     <div className="App">
       {/* <DemoState name="Hung Trinh"/> */}
       {/* <ChangeCarColor /> */}
       {/* <SmartPhoneStore /> */}
-      <DemoForm />
+      {/* <DemoForm /> */}
+      <TodoApp />
     </div>
   );
 }
