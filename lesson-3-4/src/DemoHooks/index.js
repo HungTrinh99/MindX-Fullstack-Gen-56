@@ -42,4 +42,4 @@ export default DemoHooks;
 
 // 1. componentDidMount === useEffect with empty dependencies
 // 2. componentWillUnmount = useEffect with cleanup function
-
+// 3. componentDidUpdate  === useEffect with array dependencies

@@ -4,9 +4,16 @@ let previousScrollTop = 0;
 
 const Homepage = (props) => {
   const [navbarPosition, setNavbarPosition] = useState(0);
+  const [users, setUsers] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isValidData, setIsValidData] = useState(false);
 
   const onLogOutHandler = () => {
     props.onLogOut();
+  };
+
+  const onRefreshData = () => {
+    setIsValidData(true);
   };
 
   useEffect(() => {
@@ -22,18 +29,32 @@ const Homepage = (props) => {
       }
 
       previousScrollTop = scrollTop;
-      console.log("scrollTop-", scrollTop);
     };
 
     document.addEventListener("scroll", handleScroll);
-
 
     //componentWillUnMount
     return () => {
       document.removeEventListener("scroll", handleScroll);
     };
-
   }, []);
+
+  useEffect(() => {
+    if (isValidData) {
+      setIsLoading(true);
+      setTimeout(() => {
+        fetch("https://randomuser.me/api/?results=10")
+          .then((response) => {
+            return response.json();
+          })
+          .then((responseJson) => {
+            setUsers(responseJson.results);
+            setIsLoading(false);
+            setIsValidData(false);
+          });
+      }, 1500);
+    }
+  }, [isValidData]);
 
   return (
     <div
@@ -61,6 +82,10 @@ const Homepage = (props) => {
       <button onClick={onLogOutHandler} className="btn btn-success">
         Log out
       </button>
+      <button onClick={onRefreshData} className="btn btn-secondary ml-2">
+        Refresh
+      </button>
+      <p>Total: {isLoading ? "loading...." : users.length}</p>
     </div>
   );
 };
