@@ -1,7 +1,13 @@
 import React from "react";
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, onUpdateStatus }) => {
   const { id, content, isCompleted } = todo;
-  return <div>{content}</div>;
+  const classes = isCompleted ? `todo-item done` : "todo-item";
+  return (
+    <div className={classes}>
+      <p>{content}</p>
+      <i class="fa fa-check-circle" onClick={() => onUpdateStatus(id)}></i>
+    </div>
+  );
 };
 export default TodoItem;

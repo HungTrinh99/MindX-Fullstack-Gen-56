@@ -27,10 +27,11 @@ class AddTodo extends React.Component {
   render() {
     return (
       <div className="addTodo-container">
-        <form onSubmit={this.onSubmitHandler}>
-          <div className="row">
-            <div className="col-10">
-              <div className="form-group">
+        <h4>ADD ITEM</h4>
+        <div className="add-item-input">
+          <form onSubmit={this.onSubmitHandler}>
+            <div className="row">
+              <div className="col-10">
                 <input
                   type="text"
                   className="form-control"
@@ -41,14 +42,14 @@ class AddTodo extends React.Component {
                   onChange={this.onChangeHanlder}
                 />
               </div>
+              <div className="col-2">
+                <button type="submit" className="btn btn-primary">
+                  ADD
+                </button>
+              </div>
             </div>
-            <div className="col-2">
-              <button type="submit" className="btn btn-primary">
-                ADD
-              </button>
-            </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     );
   }

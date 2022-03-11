@@ -6,6 +6,7 @@ import TodoList from "./TodoList";
 class TodoApp extends Component {
   state = {
     todos: [],
+    filterValue: "",
   };
 
   onAddNewTodo = (todo) => {
@@ -13,13 +14,33 @@ class TodoApp extends Component {
       todos: [todo, ...this.state.todos],
     });
   };
-  render() {
+
+  onUpdateStatus = (id) => {
     const { todos } = this.state;
+    const idx = todos.findIndex((todo) => todo.id === id);
+    const currentStatus = todos[idx]["isCompleted"];
+    todos[idx]["isCompleted"] = !currentStatus; //toggle
+    this.setState({
+      todos: todos,
+    });
+  };
+
+  onFilterChange = (filterValue) => {
+    this.setState({
+      filterValue,
+    });
+  };
+  render() {
+    const { todos, filterValue } = this.state;
     return (
       <div className="todo-wrapper">
         <div className="todo-container">
-          <TodoFilter />
-          <TodoList todos={todos} />
+          <TodoFilter onFilterChange={this.onFilterChange} />
+          <TodoList
+            todos={todos}
+            onUpdateStatus={this.onUpdateStatus}
+            filterValue={filterValue}
+          />
           <AddTodo onAddNewTodo={this.onAddNewTodo} />
         </div>
       </div>

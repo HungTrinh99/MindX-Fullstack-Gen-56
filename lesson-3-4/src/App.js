@@ -1,5 +1,6 @@
 import "./App.css";
 import DemoForm from "./DemoForm";
+import DemoLifecycle from "./DemoLifecycle";
 import DemoState from "./DemoState";
 import ChangeCarColor from "./DemoState/ChangeCarColor";
 import SmartPhoneStore from "./SmartPhoneStore/SmartPhoneStore";
@@ -11,7 +12,8 @@ function App() {
       {/* <ChangeCarColor /> */}
       {/* <SmartPhoneStore /> */}
       {/* <DemoForm /> */}
-      <TodoApp />
+      {/* <TodoApp /> */}
+      <DemoLifecycle />
     </div>
   );
 }
