@@ -1,34 +1,37 @@
-import "./App.css";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import React from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
+import Header from "./layouts/Header";
 import Homepage from "./containers/Home";
 import AboutPage from "./containers/About";
+import UserDetail from "./containers/UserDetail";
 import NotFoundPage from "./containers/NotFound";
+import "./App.css";
 
 function App() {
   return (
     <BrowserRouter>
-      <nav>
-        <Link to="/" className="me-2">
-          Home
-        </Link>
-        <Link to="/about" className="me-2">
-          About
-        </Link>
-        <Link to="/i-dont-know-1" className="me-2">
-          Dont know 1
-        </Link>
-        <Link to="/i-dont-know-2" className="me-2">
-          Dont know 2
-        </Link>
-      </nav>
-
-      <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/about" element={<AboutPage />} />
-        <Route path="*" element={<NotFoundPage />} />
-      </Routes>
+      <Header />
+      <div className="container">
+        <Routes>
+          <Route path="/" element={<Homepage />} />
+          <Route path="/about" element={<AboutPage />} />
+          <Route path="/users/:login" element={<UserDetail />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </div>
     </BrowserRouter>
   );
 }
 
 export default App;
+
+
+/**
+ * 
+ * - Project GITHUB FINDER, Github API
+ * - Organize folder structure
+ * - React rouder dom - version 6
+ * - HTTP Request: axios
+ * - helpers
+ */
