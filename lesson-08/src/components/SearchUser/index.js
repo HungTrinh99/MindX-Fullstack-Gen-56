@@ -9,12 +9,12 @@ const SearchUser = (props) => {
   };
 
   const onSubmitHandler = (e) => {
-    console.log(" i am here");
     e.preventDefault();
     props.onSearchUser(searchValue);
     setSearchValue("");
   };
 
+  const { hasClearButton, onClearUser } = props;
   return (
     <div className="search-user-container">
       <form onSubmit={onSubmitHandler}>
@@ -34,13 +34,15 @@ const SearchUser = (props) => {
           type="submit"
           className="mb-2"
         />
-        <Button
-          label="Clear users"
-          buttonType="primary"
-          type="button"
-          fullWidth={true}
-          onClick={() => props.onClearUser()}
-        />
+        {hasClearButton && (
+          <Button
+            label="Clear users"
+            buttonType="primary"
+            type="button"
+            fullWidth={true}
+            onClick={() => onClearUser()}
+          />
+        )}
       </form>
     </div>
   );

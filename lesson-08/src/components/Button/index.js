@@ -34,13 +34,11 @@ const Button = (props) => {
 };
 
 Button.defaultProps = {
-  label: "Button",
   fullWidth: false,
   onClick: () => {},
   type: "button",
 };
 Button.propTypes = {
-  label: PropTypes.string,
   type: PropTypes.string,
   fullWidth: PropTypes.bool,
   onClick: PropTypes.func,

@@ -27,6 +27,7 @@ const SearchPage = () => {
     setLoading(false);
   };
   const onClearUser = () => setUsers([]);
+  const hasClearButton = users.length !== 0;
   return (
     <div className=" mt-5">
       {isError && (
@@ -34,7 +35,11 @@ const SearchPage = () => {
           Please enter the keyword before searching...
         </p>
       )}
-      <SearchUser onSearchUser={onSearchUser} onClearUser={onClearUser} />
+      <SearchUser
+        onSearchUser={onSearchUser}
+        onClearUser={onClearUser}
+        hasClearButton={hasClearButton}
+      />
       <UserList users={users} loading={loading} />
     </div>
   );
