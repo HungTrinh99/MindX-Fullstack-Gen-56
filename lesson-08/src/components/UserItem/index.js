@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import Button from "../Button";
 const UserItem = (props) => {
   const navigate = useNavigate();
 
@@ -14,7 +15,7 @@ const UserItem = (props) => {
     <div className="user-container">
       <img src={avatar_url} alt={login} />
       <h5>{login}</h5>
-      <button onClick={onRedirectToUserDetail}>More</button>
+      <Button label="More" onClick={onRedirectToUserDetail} />
     </div>
   );
 };

@@ -8,7 +8,7 @@ const Header = () => {
         <div className="d-flex align-items-center justify-content-between">
           <Link to="/">
             <div className="nav-brand">
-              <i class="fab fa-github"></i>
+              <i className="fab fa-github"></i>
               <span>Github Finder</span>
             </div>
           </Link>

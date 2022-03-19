@@ -6,6 +6,8 @@ import Homepage from "./containers/Home";
 import AboutPage from "./containers/About";
 import UserDetail from "./containers/UserDetail";
 import NotFoundPage from "./containers/NotFound";
+import SearchPage from "./containers/SearchPage";
+
 import "./App.css";
 
 function App() {
@@ -14,10 +16,13 @@ function App() {
       <Header />
       <div className="container">
         <Routes>
-          <Route path="/" element={<Homepage />} />
-          <Route path="/about" element={<AboutPage />} />
-          <Route path="/users/:login" element={<UserDetail />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="/">
+            <Route index element={<Homepage />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="users/:login" element={<UserDetail />} />
+            <Route path="search" element={<SearchPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
         </Routes>
       </div>
     </BrowserRouter>
@@ -26,9 +31,8 @@ function App() {
 
 export default App;
 
-
 /**
- * 
+ *
  * - Project GITHUB FINDER, Github API
  * - Organize folder structure
  * - React rouder dom - version 6

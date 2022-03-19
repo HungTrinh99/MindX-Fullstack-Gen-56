@@ -10,13 +10,45 @@
   --dark-color: #000;
   --white-color: #fff;
 }
-
 /* Global settings */
 a {
   text-decoration: none;
 }
 ul {
   margin-bottom: 0;
+}
+
+/* Button styling */
+.button {
+  border: none;
+  outline: none;
+  padding: 8px 16px;
+  background-color: var(--grey-color);
+  color: var(--dark-color);
+  transition: all 0.3s;
+}
+
+.button:hover {
+  opacity: 0.8;
+}
+
+.button-secondary {
+  background-color: var(--dark-color);
+  color: var(--white-color);
+}
+
+.button-full-width {
+  display: block;
+  width: 100%;
+}
+
+/* Input Filed styling */
+.search-input {
+  border: solid 2px var(--grey-color);
+  display: block;
+  width: 100%;
+  padding: 8px 10px;
+  margin-bottom: 24px;
 }
 
 /* Header  */

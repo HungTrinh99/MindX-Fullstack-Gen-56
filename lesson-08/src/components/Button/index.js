@@ -1,14 +1,49 @@
+import React from "react";
+import PropTypes from "prop-types";
+
+const PRIMARY_BUTTON = "primary";
+const SECONDARY_BUTTON = "secondary";
+
 const Button = (props) => {
-  return <button className="btn btn-primary">{props.children}</button>;
+  const {
+    label,
+    buttonType,
+    fullWidth,
+    children,
+    onClick,
+    className,
+    type,
+    ...rest
+  } = props;
+  let classes = "button " + className;
+
+  if (fullWidth) {
+    classes += " button-full-width";
+  }
+
+  if (buttonType === PRIMARY_BUTTON) {
+    classes += "";
+  } else if (buttonType === SECONDARY_BUTTON) {
+    classes += " button-secondary";
+  }
+  return (
+    <button className={classes} onClick={onClick} type={type} {...rest}>
+      {label ? label : children}
+    </button>
+  );
 };
 
-const ButtonSecondary = (props) => {
-  return <button className="btn btn-secondary">{props.children}</button>;
+Button.defaultProps = {
+  label: "Button",
+  fullWidth: false,
+  onClick: () => {},
+  type: "button",
 };
-
-const ButtonSuccess = (props) => {
-  return <button className="btn btn-success">{props.children}</button>;
+Button.propTypes = {
+  label: PropTypes.string,
+  type: PropTypes.string,
+  fullWidth: PropTypes.bool,
+  onClick: PropTypes.func,
 };
 
 export default Button;
-export { ButtonSecondary, ButtonSuccess };
