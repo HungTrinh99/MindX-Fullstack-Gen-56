@@ -1,7 +1,7 @@
 import "./App.css";
 import Circle from "./components/Circle";
 import Square from "./components/Square";
-
+import { tool } from "./utils";
 function App() {
   return (
     <div className="App">

@@ -1,5 +1,5 @@
 import { useColor } from "./useColor";
-import { useMedia } from "./useMedia";
+import { useMediaQuery } from "./useMediaQuery";
 import { useFetch } from "./useFetch";
 
-export { useColor, useMedia, useFetch };
+export { useColor, useMediaQuery, useFetch };
