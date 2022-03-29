@@ -1,15 +1,20 @@
 import "./App.css";
 import Circle from "./components/Circle";
+import ClockApp from "./components/ClockApp";
 import Square from "./components/Square";
-import { tool } from "./utils";
+import { useMediaQuery } from "./hooks";
+
 function App() {
-  return (
-    <div className="App">
-      <h1>Custom Hooks</h1>
-      <Circle />
-      <Square />
-    </div>
-  );
+  const viewport = useMediaQuery();
+  const { width } = viewport;
+
+  if (width >= 1024) {
+    return <Circle />;
+  } else if (width >= 768) {
+    return <Square />;
+  } else {
+    return <ClockApp />;
+  }
 }
 
 export default App;
