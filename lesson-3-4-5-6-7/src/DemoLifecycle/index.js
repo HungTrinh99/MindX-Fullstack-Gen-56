@@ -71,3 +71,6 @@ class DemoLifecycle extends Component {
 export default DemoLifecycle;
 
 //Lifecycle hook !== React hook
+
+// Mounting: constructor => render => componentDidMount
+// Updating: shouldComponentUpdate => render => componentDidUpdate

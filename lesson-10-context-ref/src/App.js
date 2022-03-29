@@ -8,6 +8,7 @@ import Footer from "./components/layouts/Footer";
 import LangCtx from "./context/language";
 import ThemeContext from "./context/theme";
 import StopWatch from "./components/Stopwatch";
+import ProductList from "./components/ProductList";
 
 function App() {
   const [lang, setLang] = useState("en");
@@ -21,27 +22,29 @@ function App() {
   };
   return (
     <div className="App">
-      <LangCtx.Provider value={{ lang: "en", setLang: onChangeLanguage }}>
+      <LangCtx.Provider value={{ lang: lang, setLang: onChangeLanguage }}>
         <ThemeContext.Provider
-          value={{ theme: "dark", setTheme: onChangeTheme }}
+          value={{ theme: theme, setTheme: onChangeTheme }}
         >
           <Navbar />
           <div className="main-container">
-            <Sidebar lang={lang} />
+            <Sidebar />
             <Body>
-              {/* <ProductList /> */}
+              <ProductList />
+              {/* <StopWatch />
               <StopWatch />
               <StopWatch />
               <StopWatch />
-              <StopWatch />
-              <StopWatch />
+              <StopWatch /> */}
             </Body>
           </div>
+          <Footer />
         </ThemeContext.Provider>
-        <Footer />
       </LangCtx.Provider>
     </div>
   );
 }
 
 export default App;
+
+

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { PureComponent, useMemo, useCallback } from "react";
 import ProductItem from "../ProductItem";
 
 const data = [
@@ -36,11 +36,14 @@ const data = [
 
 const ProductList = (props) => {
   return (
-    <div className="product-list-container">
-      {data.map((item, index) => {
-        return <ProductItem item={item} key={index} lang={props.lang} />;
-      })}
-    </div>
+    <>
+      <h1>Product List</h1>
+      <div className="product-list-container">
+        {data.map((item, index) => {
+          return <ProductItem item={item} key={index} />;
+        })}
+      </div>
+    </>
   );
 };
 

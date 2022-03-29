@@ -1,8 +1,13 @@
 import React, { useContext } from "react";
 import ThemeContext from "../../context/theme";
+import LangCtx from "../../context/language";
+
 const Sidebar = (props) => {
   const themeContext = useContext(ThemeContext);
   const { theme, setTheme } = themeContext;
+
+  const langCtx = useContext(LangCtx);
+
   return (
     <div
       style={
@@ -18,7 +23,7 @@ const Sidebar = (props) => {
       }
       className="sidebar-container"
     >
-      <span>{props.lang === "en" ? "Sidebar" : "Thanh bên"}</span>
+      <span>{langCtx.lang === "en" ? "Sidebar" : "Thanh bên"}</span>
     </div>
   );
 };
