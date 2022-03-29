@@ -1,25 +1,26 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Circle from "./components/Circle";
+import Square from "./components/Square";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>Custom Hooks</h1>
+      <Circle />
+      <Square />
     </div>
   );
 }
 
 export default App;
+
+/*
+  What is Hooks??
+
+  - Hook is a special function
+  - return data based on component
+  - useFetch, useState, useEffect
+  
+
+  Hooks => reuse logic
+*/
