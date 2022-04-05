@@ -1,0 +1,15 @@
+{
+  "name": "lesson-12-modules-nodejs",
+  "version": "1.0.0",
+  "description": "Learning nodejs expressjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./index.js"
+  },
+  "author": "Hung Trinh",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.3"
+  }
+}
