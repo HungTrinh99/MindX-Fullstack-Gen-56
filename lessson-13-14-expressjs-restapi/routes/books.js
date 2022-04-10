@@ -36,6 +36,7 @@ let books = [
 
 router.get("/", (req, res) => {
   const options = req.query;
+  console.log(req);
   res.json(books);
 });
 

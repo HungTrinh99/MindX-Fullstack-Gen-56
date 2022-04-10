@@ -3,7 +3,10 @@ const cors = require("cors");
 const routes = require("./routes");
 const logger = require("./middlewares/logger");
 const app = express();
-const PORT = 3001;
+require("dotenv").config();
+
+const PORT = process.env.PORT || 5000;
+
 
 // allow all user can request
 app.use(cors());
