@@ -28,7 +28,5 @@ async function insert_one_to_db(database,collection,data){
 	await db.collection(collection).insertOne(data);
     client.close()
 	return true
-
-
 }
 module.exports = { get_data_from_db,get_client,insert_one_to_db}

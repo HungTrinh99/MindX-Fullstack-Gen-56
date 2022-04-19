@@ -1,12 +1,17 @@
+require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+
 const routes = require("./routes");
 const logger = require("./middlewares/logger");
+const connectDatabase = require("./config/db");
+
 const app = express();
-require("dotenv").config();
+
 const PORT = process.env.PORT || 5000;
 
-
+// Connect to database
+connectDatabase();
 
 // allow all user can request
 app.use(cors());
@@ -34,9 +39,6 @@ app.listen(PORT, () => {
       POST http://localhost:3001/api/v1/books/
       PUT http://localhost:3001/api/v1/books/:id
       DELETE http://localhost:3001/api/v1/books/:id
-
-
-
 */
 
 /*

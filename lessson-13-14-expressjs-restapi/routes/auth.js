@@ -1,83 +1,83 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const User = require("../models/User");
 const router = express.Router();
-const utils = require("../utils/db-utils")
-// const users = [
-//   {
-//     id: 1,
-//     username: "alice",
-//     password: "123456",
-//   },
-//   {
-//     id: 2,
-//     username: "bob",
-//     password: "654321",
-//   },
-// ];
-// // hard-coded 
+
 router.post("/login", async (req, res) => {
-	try {
-		const { username, password } = req.body;
-		if (!username || !password) {
-			throw new Error("Missing credentials")
-		}
-		const users = await utils.get_data_from_db("mindx-area-56", "users", { "username": username })
-		if (users.length != 1) {
-			throw new Error("Fail to indicate user")
-		}
-		const user = users[0]
-		if (password != user.password) {
-			throw new Error("Password for this user is wrong")
-		}
+  const { email, password } = req.body;
+  if (!email || !password) {
+    throw new Error("Missing credentials");
+  }
+  try {
+    let user = await User.findOne({ email });
+    if (!user) {
+      return res.json({
+        msg: "Invalid credentials",
+      });
+    }
 
-		//   Authorization
-		const token = jwt.sign(
-			{
-				username: user.username,
-				id: user.id,
-			},
-			process.env.JWT_SECRET_KEY,
-			{ expiresIn: +process.env.ACCESS_TOKEN_EXPRIRE_IN } // second as default
-		);
-		const refresherToken = "aaaa";
-		return res.json({
-			username: user.username,
-			accessToken: token,
-			refresherToken: refresherToken,
-		});
-	} catch (error) {
-		res.json({
-			message: error.message
-		})
-	}
+    const isMatchPassword = await bcrypt.compare(password, user.password);
+    if (!isMatchPassword) {
+      return res.json({
+        msg: "Invalid credentials",
+      });
+    }
 
+    const JWT_SECRET = process.env.JWT_SECRET_KEY;
+    const EXPIRY_TIME = +process.env.ACCESS_TOKEN_EXPRIRE_IN;
+    //   Authorization
+    const token = jwt.sign(
+      {
+        fullname: user.fullname,
+        id: user.id,
+      },
+      JWT_SECRET,
+      { expiresIn: EXPIRY_TIME } // second as default
+    );
+
+    res.json({
+      fullname: user.fullname,
+      accessToken: token,
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
 });
 router.post("/register", async (req, res) => {
-	try {
-		const { username, password, fullname } = req.body
-		if (!(username && password && fullname)) {
-			throw new Error("Missing information")
-		}
-		const users = await utils.get_data_from_db("mindx-area-56", "users", { "username": username })
-		if (users.length >= 1) {
-			throw new Error("Username has been taken!")
-		}
-		const signal = await utils.insert_one_to_db("mindx-area-56", "users", {
-			username,
-			password,
-			fullname
-		})
-		if (!signal) {
-			throw new Error("Fail to create!")
-		}
-		res.json({ message: "Successfully Created" })
+  try {
+    const { email, password, fullname } = req.body;
+    if (!(email && password && fullname)) {
+      throw new Error("Missing information");
+    }
 
-	} catch (error) {
-		res.json({
-			message: error.message
-		})
-	}
+    let user = await User.findOne({ email });
+    if (user) {
+      return res.json({
+        msg: "Email is already exist",
+      });
+    }
+    const salt = await bcrypt.genSalt(10);
+    const hashPassword = await bcrypt.hash(password, salt);
 
+    user = new User({
+      fullname,
+      email,
+      password: hashPassword,
+    });
+
+    await user.save();
+
+    res.status(201).json({
+      msg: "Create successflly",
+    });
+  } catch (error) {
+    res.json({
+      message: error.message,
+    });
+  }
 });
 
 module.exports = router;
