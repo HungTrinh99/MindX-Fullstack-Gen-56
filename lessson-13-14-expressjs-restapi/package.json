@@ -6,7 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "dev": "nodemon --inspect server.js"
+    "client": "npm start --prefix client",
+    "server": "nodemon --inspect server.js",
+    "dev": "concurrently \"npm run server\" \"npm run client\" "
   },
   "keywords": [
     "REST",
@@ -26,6 +28,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
+    "concurrently": "^7.1.0",
     "nodemon": "^2.0.15"
   }
 }
