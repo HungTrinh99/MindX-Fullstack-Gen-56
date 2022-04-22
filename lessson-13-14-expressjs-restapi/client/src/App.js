@@ -5,6 +5,7 @@ import Register from "./containers/Register";
 import Login from "./containers/Login";
 
 import Header from "./components/Header";
+import NotFoundPage from "./containers/NotFoundPage";
 const App = () => {
   return (
     <Router>
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="register" element={<Register />} />
         <Route path="login" element={<Login />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </Router>
   );

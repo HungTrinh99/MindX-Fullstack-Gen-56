@@ -12,14 +12,14 @@ router.post("/login", async (req, res) => {
   try {
     let user = await User.findOne({ email });
     if (!user) {
-      return res.json({
+      return res.status(400).json({
         msg: "Invalid credentials",
       });
     }
 
     const isMatchPassword = await bcrypt.compare(password, user.password);
     if (!isMatchPassword) {
-      return res.json({
+      return res.status(400).json({
         msg: "Invalid credentials",
       });
     }
@@ -38,12 +38,10 @@ router.post("/login", async (req, res) => {
 
     res.json({
       fullname: user.fullname,
-      accessToken: token,
+      token: token,
     });
   } catch (error) {
-    res.json({
-      message: error.message,
-    });
+    res.status(500).send(error.message);
   }
 });
 router.post("/register", async (req, res) => {
