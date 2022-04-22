@@ -1,20 +1,25 @@
-import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import css from "./App.module.css";
 import Home from "./containers/Home";
 import Register from "./containers/Register";
 import Login from "./containers/Login";
-
 import Header from "./components/Header";
-const App = () => {
+
+import AuthState from "./context/auth/AuthState";
+const App = (props) => {
   return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="register" element={<Register />} />
-        <Route path="login" element={<Login />} />
-      </Routes>
-    </Router>
+    <div className={css.appRoot}>
+      <AuthState>
+        <Router>
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="register" element={<Register />} />
+            <Route path="login" element={<Login />} />
+          </Routes>
+        </Router>
+      </AuthState>
+    </div>
   );
 };
 

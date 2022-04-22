@@ -1,0 +1,6 @@
+.root {
+  height: 100vh;
+  max-width: 480px;
+  position: relative;
+  margin: auto;
+}

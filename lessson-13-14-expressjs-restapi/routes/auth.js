@@ -1,8 +1,23 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
+const authMdw = require("../middlewares/auth");
 const User = require("../models/User");
 const router = express.Router();
+
+// @route     GET api/auth
+// @desc      Get logged in user
+// @access    Private
+router.get("/", authMdw, async (req, res) => {
+  console.log("Here-", req.user);
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -12,14 +27,14 @@ router.post("/login", async (req, res) => {
   try {
     let user = await User.findOne({ email });
     if (!user) {
-      return res.json({
+      return res.status(400).json({
         msg: "Invalid credentials",
       });
     }
 
     const isMatchPassword = await bcrypt.compare(password, user.password);
     if (!isMatchPassword) {
-      return res.json({
+      return res.status(400).json({
         msg: "Invalid credentials",
       });
     }
@@ -38,12 +53,11 @@ router.post("/login", async (req, res) => {
 
     res.json({
       fullname: user.fullname,
-      accessToken: token,
+      token: token,
     });
   } catch (error) {
-    res.json({
-      message: error.message,
-    });
+    console.error(err.message);
+    res.status(500).send("Server error");
   }
 });
 router.post("/register", async (req, res) => {
