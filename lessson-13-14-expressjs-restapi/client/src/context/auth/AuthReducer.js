@@ -1,4 +1,3 @@
-import { response } from "express";
 import AuthAPI from "../../services/auth";
 import {
   FETCH_USER,
@@ -7,6 +6,9 @@ import {
   LOGIN_REQUEST,
   LOGIN_SUCCESS,
   LOG_OUT,
+  SIGNUP_FAIL,
+  SIGNUP_REQUEST,
+  SIGNUP_SUCCESS,
 } from "../types";
 
 const reducer = (state, action) => {
@@ -48,6 +50,24 @@ const reducer = (state, action) => {
         error: payload,
         token: null,
         user: null,
+      };
+    case SIGNUP_REQUEST:
+      return {
+        ...state,
+        loading: true,
+        signupError: null,
+      };
+    case SIGNUP_SUCCESS: {
+      return {
+        ...state,
+        loading: false,
+      };
+    }
+    case SIGNUP_FAIL:
+      return {
+        ...state,
+        loading: false,
+        signupError: payload,
       };
 
     default:
@@ -96,6 +116,27 @@ export const fetchUserData = async (dispatch) => {
   } catch (e) {
     dispatch({
       type: FETCH_USER_ERROR,
+      payload: e.response.data.msg,
+    });
+  }
+};
+
+export const signup = async (formData, dispatch) => {
+  const { email, password } = formData;
+  dispatch({
+    type: SIGNUP_REQUEST,
+  });
+
+  try {
+    await AuthAPI.signup(formData);
+    dispatch({
+      type: SIGNUP_SUCCESS,
+    });
+
+    login({ email, password }, dispatch);
+  } catch (e) {
+    dispatch({
+      type: SIGNUP_FAIL,
       payload: e.response.data.msg,
     });
   }

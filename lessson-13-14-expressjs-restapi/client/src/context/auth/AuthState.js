@@ -6,16 +6,17 @@ import reducer, { fetchUserData } from "./AuthReducer";
 const AuthState = (props) => {
   const initialState = {
     token: localStorage.getItem("token"),
-    isAuthenticated: localStorage.getItem("token") !== undefined,
+    isAuthenticated: false,
     loading: false,
     error: null,
     user: null,
+    signupError: null,
   };
   const [state, dispatch] = useReducer(reducer, initialState);
 
   useEffect(() => {
     setAuthToken(state.token);
-    fetchUserData(dispatch)
+    fetchUserData(dispatch);
   }, [state.token]);
 
   return (
