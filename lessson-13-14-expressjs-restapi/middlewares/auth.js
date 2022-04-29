@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 
 const auth = (req, res, next) => {
   const token = req.header("x-auth-token");
+
   if (!token) {
     return res.status(401).send("User must loggin first");
   }
@@ -10,7 +11,7 @@ const auth = (req, res, next) => {
     if (err) {
       return res.status(401).send("Invalid token");
     }
-
+    req.id = decoded.id;
     next();
   });
 };

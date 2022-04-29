@@ -31,6 +31,7 @@ export default App;
   - Second time:
     + Keep authenticated status
     + Get token from localstorage => verify token? => attach token x-auth-token => redirect
+  => login => loadUser  
   
   Logout:
     + isAuthenticated: false

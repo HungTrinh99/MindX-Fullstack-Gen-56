@@ -9,6 +9,7 @@ const router = express.Router();
 
 router.use("/books", authMdw, booksRouter);
 router.use("/categories", authMdw, categoriesRouter);
+router.use("/categories", authMdw, categoriesRouter);
 router.use("/auth", authRouter);
 
 module.exports = router;

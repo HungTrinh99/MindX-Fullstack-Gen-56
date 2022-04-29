@@ -4,7 +4,7 @@ import { Navigate } from "react-router-dom";
 import { message } from "antd";
 import LoginForm from "./components/LoginForm";
 import css from "./LoginPage.module.css";
-import { login } from "../../context/auth/AuthState";
+import { login } from "../../context/auth/AuthReducer";
 
 const LoginPage = () => {
   const { state, dispatch } = useContext(AuthContext);
@@ -23,8 +23,6 @@ const LoginPage = () => {
       message.error(error);
     }
   }, [error]);
-
-  console.log("Re-render");
 
   if (isAuthenticated) {
     return <Navigate to="/" />;

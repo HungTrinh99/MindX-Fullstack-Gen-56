@@ -2,7 +2,27 @@ const express = require("express");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
+const authMdw = require("../middlewares/auth");
 const router = express.Router();
+
+/// api/v1/auth/
+router.get("/", authMdw, async (req, res) => {
+  const id = req.id;
+
+  try {
+    const user = await User.findById(id).select("-password");
+    if (!user) {
+      return res.status(400).json({
+        msg: "No authorization!",
+      });
+    }
+    res.json({
+      user,
+    });
+  } catch (e) {
+    res.status(500).send(e.message);
+  }
+});
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -29,7 +49,6 @@ router.post("/login", async (req, res) => {
     //   Authorization
     const token = jwt.sign(
       {
-        fullname: user.fullname,
         id: user.id,
       },
       JWT_SECRET,
@@ -37,13 +56,13 @@ router.post("/login", async (req, res) => {
     );
 
     res.json({
-      fullname: user.fullname,
       token: token,
     });
   } catch (error) {
     res.status(500).send(error.message);
   }
 });
+
 router.post("/register", async (req, res) => {
   try {
     const { email, password, fullname } = req.body;
@@ -79,6 +98,3 @@ router.post("/register", async (req, res) => {
 });
 
 module.exports = router;
-
-// Nha phat hanh
-// han su sung

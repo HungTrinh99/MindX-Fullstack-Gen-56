@@ -1,8 +1,9 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../../context/auth/AuthContext";
+import { logout } from "../../context/auth/AuthReducer";
 import css from "./Header.module.css";
-import { logout } from "../../context/auth/AuthState";
+
 const Header = (props) => {
   const { state, dispatch } = useContext(AuthContext);
   const { isAuthenticated } = state;
