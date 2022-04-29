@@ -7,13 +7,14 @@ import Login from "./containers/Login";
 import Header from "./components/Header";
 import NotFoundPage from "./containers/NotFoundPage";
 import AuthState from "./context/auth/AuthState";
+import PrivateRoute from "./components/PrivateRoute";
 const App = () => {
   return (
     <AuthState>
       <Router>
         <Header />
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<PrivateRoute component={Home} />} />
           <Route path="register" element={<Register />} />
           <Route path="login" element={<Login />} />
           <Route path="*" element={<NotFoundPage />} />

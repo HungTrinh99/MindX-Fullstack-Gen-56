@@ -1,8 +1,20 @@
 const express = require("express");
 const jwt = require("jsonwebtoken");
+
 const bcrypt = require("bcryptjs");
 const User = require("../models/User");
+const authMdw = require("../middlewares/auth");
 const router = express.Router();
+
+router.get("/", authMdw, async (req, res) => {
+  try {
+    const user = await User.findById(req.user.id).select("-password");
+    res.json(user);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server Error");
+  }
+});
 
 router.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -26,12 +38,16 @@ router.post("/login", async (req, res) => {
 
     const JWT_SECRET = process.env.JWT_SECRET_KEY;
     const EXPIRY_TIME = +process.env.ACCESS_TOKEN_EXPRIRE_IN;
-    //   Authorization
-    const token = jwt.sign(
-      {
-        fullname: user.fullname,
+
+    const payload = {
+      user: {
         id: user.id,
       },
+    };
+
+    //   Authorization
+    const token = jwt.sign(
+      payload,
       JWT_SECRET,
       { expiresIn: EXPIRY_TIME } // second as default
     );
@@ -79,6 +95,3 @@ router.post("/register", async (req, res) => {
 });
 
 module.exports = router;
-
-// Nha phat hanh
-// han su sung
